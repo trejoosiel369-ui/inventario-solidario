@@ -1,0 +1,2309 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Inventario Solidario | SmartCare</title>
+
+<!-- ICONOS -->
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+
+<!-- CHART -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<!-- FUENTE -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+
+--primary:#0B1F3A;
+--secondary:#1F6BFF;
+--cyan:#57D4FF;
+--light:#F4F8FF;
+--white:#FFFFFF;
+--text:#111827;
+--glass:rgba(255,255,255,.12);
+
+--shadow:
+0 20px 60px rgba(0,0,0,.12);
+
+}
+
+.dark{
+
+--light:#0F172A;
+--white:#1E293B;
+--text:#FFFFFF;
+
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Inter',sans-serif;
+}
+
+body{
+
+background:var(--light);
+color:var(--text);
+
+overflow-x:hidden;
+
+transition:.3s;
+
+}
+
+/* SCROLL */
+
+::-webkit-scrollbar{
+width:10px;
+}
+
+::-webkit-scrollbar-thumb{
+background:#1F6BFF;
+border-radius:20px;
+}
+
+/* ================================= */
+/* SELECTOR */
+/* ================================= */
+
+#inicioSelector{
+
+height:100vh;
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+background:
+linear-gradient(rgba(11,31,58,.88),
+rgba(31,107,255,.75)),
+
+url('https://images.unsplash.com/photo-1516549655169-df83a0774514?q=80&w=1800&auto=format&fit=crop');
+
+background-size:cover;
+background-position:center;
+
+padding:20px;
+
+position:relative;
+
+overflow:hidden;
+
+}
+
+/* CIRCULOS */
+
+#inicioSelector::before{
+
+content:"";
+
+position:absolute;
+
+width:450px;
+height:450px;
+
+background:rgba(255,255,255,.08);
+
+border-radius:50%;
+
+top:-120px;
+right:-120px;
+
+}
+
+#inicioSelector::after{
+
+content:"";
+
+position:absolute;
+
+width:300px;
+height:300px;
+
+background:rgba(87,212,255,.15);
+
+border-radius:50%;
+
+bottom:-80px;
+left:-80px;
+
+}
+
+.selector-box{
+
+width:520px;
+
+background:rgba(255,255,255,.10);
+
+backdrop-filter:blur(16px);
+
+border:1px solid rgba(255,255,255,.15);
+
+padding:60px;
+
+border-radius:40px;
+
+text-align:center;
+
+color:white;
+
+box-shadow:0 20px 80px rgba(0,0,0,.25);
+
+position:relative;
+z-index:5;
+
+animation:fadeUp 1s ease;
+
+}
+
+.selector-logo{
+
+width:90px;
+height:90px;
+
+margin:auto;
+
+margin-bottom:25px;
+
+background:white;
+
+border-radius:25px;
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+font-size:38px;
+
+color:#1F6BFF;
+
+}
+
+.selector-box h1{
+
+font-size:52px;
+
+font-weight:800;
+
+margin-bottom:15px;
+
+}
+
+.selector-box p{
+
+line-height:1.9;
+
+opacity:.95;
+
+font-size:15px;
+
+margin-bottom:35px;
+
+}
+
+.selector-buttons{
+
+display:flex;
+flex-direction:column;
+gap:18px;
+
+}
+
+.selector-buttons button{
+
+padding:18px;
+
+border:none;
+
+border-radius:18px;
+
+font-size:16px;
+
+font-weight:700;
+
+cursor:pointer;
+
+transition:.3s;
+
+}
+
+.selector-buttons button:hover{
+
+transform:translateY(-4px);
+
+}
+
+.btn-admin{
+
+background:white;
+
+color:#0B1F3A;
+
+}
+
+.btn-user{
+
+background:
+linear-gradient(135deg,#57D4FF,#FFFFFF);
+
+color:#0B1F3A;
+
+}
+
+/* ================================= */
+/* LOGIN */
+/* ================================= */
+
+#login{
+
+display:none;
+
+height:100vh;
+
+justify-content:center;
+align-items:center;
+
+background:
+linear-gradient(rgba(11,31,58,.88),
+rgba(31,107,255,.78)),
+
+url('https://images.unsplash.com/photo-1584515933487-779824d29309?q=80&w=1800&auto=format&fit=crop');
+
+background-size:cover;
+background-position:center;
+
+}
+
+.login-box{
+
+width:430px;
+
+background:rgba(255,255,255,.12);
+
+backdrop-filter:blur(16px);
+
+padding:50px;
+
+border-radius:40px;
+
+border:1px solid rgba(255,255,255,.15);
+
+color:white;
+
+text-align:center;
+
+box-shadow:0 20px 80px rgba(0,0,0,.25);
+
+animation:fadeUp 1s ease;
+
+}
+
+.login-icon{
+
+width:85px;
+height:85px;
+
+margin:auto;
+margin-bottom:25px;
+
+background:white;
+
+border-radius:25px;
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+font-size:35px;
+
+color:#1F6BFF;
+
+}
+
+.login-box h1{
+
+font-size:40px;
+
+margin-bottom:10px;
+
+}
+
+.login-box p{
+
+opacity:.9;
+
+margin-bottom:25px;
+
+}
+
+.login-box input{
+
+width:100%;
+
+padding:17px;
+
+margin-top:15px;
+
+border:none;
+
+border-radius:16px;
+
+background:rgba(255,255,255,.12);
+
+color:white;
+
+font-size:15px;
+
+}
+
+.login-box input::placeholder{
+
+color:rgba(255,255,255,.7);
+
+}
+
+.login-box button{
+
+width:100%;
+
+padding:17px;
+
+margin-top:20px;
+
+border:none;
+
+border-radius:16px;
+
+background:white;
+
+color:#0B1F3A;
+
+font-weight:700;
+
+cursor:pointer;
+
+transition:.3s;
+
+}
+
+.login-box button:hover{
+
+transform:scale(1.02);
+
+}
+
+/* ================================= */
+/* HEADER */
+/* ================================= */
+
+header{
+
+background:
+linear-gradient(90deg,#0B1F3A,#1F6BFF);
+
+padding:22px 35px;
+
+display:flex;
+justify-content:space-between;
+align-items:center;
+
+position:sticky;
+top:0;
+
+z-index:100;
+
+box-shadow:0 5px 25px rgba(0,0,0,.12);
+
+color:white;
+
+}
+
+.header-left{
+
+display:flex;
+align-items:center;
+gap:18px;
+
+}
+
+.logo-mini{
+
+width:55px;
+height:55px;
+
+background:white;
+
+border-radius:18px;
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+font-size:24px;
+
+color:#1F6BFF;
+
+}
+
+.header-left h1{
+
+font-size:30px;
+
+}
+
+.header-left p{
+
+opacity:.9;
+
+font-size:14px;
+
+}
+
+.header-actions{
+
+display:flex;
+gap:12px;
+
+}
+
+.header-actions button{
+
+padding:12px 16px;
+
+border:none;
+
+border-radius:14px;
+
+background:white;
+
+color:#0B1F3A;
+
+font-weight:700;
+
+cursor:pointer;
+
+transition:.3s;
+
+}
+
+.header-actions button:hover{
+
+transform:translateY(-3px);
+
+}
+
+/* ================================= */
+/* SISTEMAS */
+/* ================================= */
+
+#sistema,
+#solicitantePanel{
+
+display:none;
+min-height:100vh;
+
+}
+
+/* ================================= */
+/* CONTAINER */
+/* ================================= */
+
+.container{
+
+display:flex;
+
+}
+
+/* ================================= */
+/* SIDEBAR */
+/* ================================= */
+
+.sidebar{
+
+width:270px;
+
+background:#08152B;
+
+min-height:100vh;
+
+padding:30px 22px;
+
+color:white;
+
+}
+
+.sidebar-title{
+
+display:flex;
+align-items:center;
+gap:12px;
+
+margin-bottom:35px;
+
+}
+
+.sidebar-title i{
+
+font-size:28px;
+
+}
+
+.sidebar p{
+
+padding:15px;
+
+margin:12px 0;
+
+border-radius:16px;
+
+cursor:pointer;
+
+transition:.3s;
+
+font-weight:500;
+
+}
+
+.sidebar p:hover{
+
+background:rgba(255,255,255,.12);
+
+transform:translateX(5px);
+
+}
+
+/* ================================= */
+/* CONTENT */
+/* ================================= */
+
+.content{
+
+flex:1;
+
+padding:35px;
+
+}
+
+/* ================================= */
+/* HERO */
+/* ================================= */
+
+.hero{
+
+background:
+linear-gradient(135deg,#0B1F3A,#1F6BFF);
+
+border-radius:40px;
+
+padding:45px;
+
+display:flex;
+justify-content:space-between;
+align-items:center;
+
+position:relative;
+
+overflow:hidden;
+
+color:white;
+
+margin-bottom:35px;
+
+box-shadow:var(--shadow);
+
+}
+
+.hero::before{
+
+content:"";
+
+position:absolute;
+
+width:380px;
+height:380px;
+
+background:rgba(255,255,255,.07);
+
+border-radius:50%;
+
+right:-120px;
+top:-120px;
+
+}
+
+.hero h1{
+
+font-size:48px;
+
+font-weight:800;
+
+margin-bottom:15px;
+
+}
+
+.hero p{
+
+max-width:650px;
+
+line-height:1.9;
+
+opacity:.95;
+
+}
+
+.hero i{
+
+font-size:130px;
+
+opacity:.92;
+
+animation:float 3s infinite ease-in-out;
+
+}
+
+/* ================================= */
+/* BADGES */
+/* ================================= */
+
+.badges{
+
+display:flex;
+gap:12px;
+flex-wrap:wrap;
+
+margin-top:25px;
+
+}
+
+.badge{
+
+padding:12px 18px;
+
+background:rgba(255,255,255,.12);
+
+border-radius:30px;
+
+font-size:14px;
+
+}
+
+/* ================================= */
+/* IMPACTO */
+/* ================================= */
+
+.impacto{
+
+display:grid;
+
+grid-template-columns:
+repeat(auto-fit,minmax(220px,1fr));
+
+gap:22px;
+
+margin-bottom:30px;
+
+}
+
+.impact-card{
+
+background:
+linear-gradient(135deg,#0B1F3A,#1F6BFF);
+
+padding:30px;
+
+border-radius:30px;
+
+color:white;
+
+text-align:center;
+
+position:relative;
+
+overflow:hidden;
+
+box-shadow:var(--shadow);
+
+transition:.3s;
+
+}
+
+.impact-card:hover{
+
+transform:translateY(-5px);
+
+}
+
+.impact-card::before{
+
+content:"";
+
+position:absolute;
+
+width:120px;
+height:120px;
+
+background:rgba(255,255,255,.08);
+
+border-radius:50%;
+
+right:-40px;
+top:-40px;
+
+}
+
+.impact-card h2{
+
+font-size:50px;
+
+margin:10px 0;
+
+}
+
+/* ================================= */
+/* STATS */
+/* ================================= */
+
+.stats{
+
+display:grid;
+
+grid-template-columns:
+repeat(auto-fit,minmax(220px,1fr));
+
+gap:22px;
+
+margin-bottom:30px;
+
+}
+
+.card{
+
+background:var(--white);
+
+padding:30px;
+
+border-radius:30px;
+
+box-shadow:var(--shadow);
+
+position:relative;
+
+overflow:hidden;
+
+transition:.3s;
+
+}
+
+.card:hover{
+
+transform:translateY(-5px);
+
+}
+
+.card::before{
+
+content:"";
+
+position:absolute;
+
+width:140px;
+height:140px;
+
+background:rgba(31,107,255,.08);
+
+border-radius:50%;
+
+right:-50px;
+top:-50px;
+
+}
+
+.card i{
+
+font-size:45px;
+
+color:#1F6BFF;
+
+margin-bottom:18px;
+
+}
+
+.card h3{
+
+margin-bottom:8px;
+
+}
+
+.card h2{
+
+font-size:45px;
+
+}
+
+/* ================================= */
+/* FORM */
+/* ================================= */
+
+.form{
+
+background:var(--white);
+
+padding:35px;
+
+border-radius:35px;
+
+box-shadow:var(--shadow);
+
+margin-top:25px;
+
+}
+
+.form h2{
+
+font-size:34px;
+
+margin-bottom:10px;
+
+}
+
+.form p{
+
+opacity:.8;
+
+margin-bottom:25px;
+
+}
+
+.grid{
+
+display:grid;
+
+grid-template-columns:
+repeat(auto-fit,minmax(250px,1fr));
+
+gap:18px;
+
+}
+
+input,
+select{
+
+padding:17px;
+
+border-radius:16px;
+
+border:1px solid #DCE6F4;
+
+font-size:15px;
+
+width:100%;
+
+background:#F9FBFF;
+
+}
+
+.form button{
+
+width:100%;
+
+padding:17px;
+
+margin-top:25px;
+
+border:none;
+
+border-radius:18px;
+
+background:
+linear-gradient(135deg,#0B1F3A,#1F6BFF);
+
+color:white;
+
+font-size:17px;
+
+font-weight:700;
+
+cursor:pointer;
+
+transition:.3s;
+
+}
+
+.form button:hover{
+
+transform:scale(1.01);
+
+}
+
+/* ================================= */
+/* GALERIA */
+/* ================================= */
+
+.galeria{
+
+display:grid;
+
+grid-template-columns:
+repeat(auto-fit,minmax(260px,1fr));
+
+gap:22px;
+
+margin-top:35px;
+
+}
+
+.galeria-card{
+
+position:relative;
+
+overflow:hidden;
+
+border-radius:30px;
+
+box-shadow:var(--shadow);
+
+}
+
+.galeria-card img{
+
+width:100%;
+
+height:250px;
+
+object-fit:cover;
+
+transition:.4s;
+
+}
+
+.galeria-card:hover img{
+
+transform:scale(1.08);
+
+}
+
+.overlay{
+
+position:absolute;
+
+bottom:0;
+
+width:100%;
+
+padding:25px;
+
+background:
+linear-gradient(transparent,
+rgba(0,0,0,.75));
+
+color:white;
+
+}
+
+/* ================================= */
+/* PASOS */
+/* ================================= */
+
+.pasos{
+
+display:grid;
+
+grid-template-columns:
+repeat(auto-fit,minmax(220px,1fr));
+
+gap:20px;
+
+margin-top:35px;
+
+}
+
+.paso{
+
+background:
+linear-gradient(135deg,#0B1F3A,#1F6BFF);
+
+padding:28px;
+
+border-radius:30px;
+
+color:white;
+
+text-align:center;
+
+box-shadow:var(--shadow);
+
+}
+
+.numero{
+
+width:70px;
+height:70px;
+
+background:white;
+
+color:#0B1F3A;
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+border-radius:50%;
+
+margin:auto;
+
+margin-bottom:20px;
+
+font-size:28px;
+
+font-weight:800;
+
+}
+
+/* ================================= */
+/* TABLA */
+/* ================================= */
+
+.search{
+
+margin:25px 0 10px;
+
+}
+
+.search input{
+
+background:var(--white);
+
+box-shadow:var(--shadow);
+
+border:none;
+
+}
+
+table{
+
+width:100%;
+
+border-collapse:collapse;
+
+background:var(--white);
+
+border-radius:30px;
+
+overflow:hidden;
+
+box-shadow:var(--shadow);
+
+margin-top:20px;
+
+}
+
+th{
+
+background:#0B1F3A;
+
+color:white;
+
+padding:20px;
+
+}
+
+td{
+
+padding:18px;
+
+text-align:center;
+
+}
+
+tr:nth-child(even){
+
+background:rgba(0,0,0,.03);
+
+}
+
+/* ================================= */
+/* CHART */
+/* ================================= */
+
+.chart-box{
+
+background:var(--white);
+
+padding:35px;
+
+margin-top:30px;
+
+border-radius:35px;
+
+box-shadow:var(--shadow);
+
+}
+
+/* ================================= */
+/* ALERTA */
+/* ================================= */
+
+.alerta{
+
+padding:18px;
+
+background:#FFF4CC;
+
+color:#8A6D00;
+
+border-radius:18px;
+
+font-weight:600;
+
+margin-bottom:25px;
+
+box-shadow:var(--shadow);
+
+}
+
+/* ================================= */
+/* PRIORIDAD */
+/* ================================= */
+
+.alta{
+color:red;
+font-weight:bold;
+}
+
+.media{
+color:orange;
+font-weight:bold;
+}
+
+.baja{
+color:green;
+font-weight:bold;
+}
+
+.critica{
+color:#7A0000;
+font-weight:bold;
+}
+
+/* ================================= */
+/* ANIMACIONES */
+/* ================================= */
+
+@keyframes float{
+
+0%{
+transform:translateY(0);
+}
+
+50%{
+transform:translateY(-10px);
+}
+
+100%{
+transform:translateY(0);
+}
+
+}
+
+@keyframes fadeUp{
+
+from{
+opacity:0;
+transform:translateY(30px);
+}
+
+to{
+opacity:1;
+transform:translateY(0);
+}
+
+}
+
+/* ================================= */
+/* RESPONSIVE */
+/* ================================= */
+
+@media(max-width:900px){
+
+.container{
+flex-direction:column;
+}
+
+.sidebar{
+width:100%;
+min-height:auto;
+}
+
+.hero{
+flex-direction:column;
+text-align:center;
+gap:30px;
+}
+
+.hero h1{
+font-size:36px;
+}
+
+.hero i{
+font-size:95px;
+}
+
+.content{
+padding:20px;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- SELECTOR -->
+
+<div id="inicioSelector">
+
+<div class="selector-box">
+
+<div class="selector-logo">
+<i class="fa-solid fa-heart-pulse"></i>
+</div>
+
+<h1>Jóvenes por Cerritos</h1>
+
+<p>
+
+Sistema digital inteligente para la gestión,
+control y préstamo de aparatos ortopédicos
+de la Asociación Jóvenes por Cerritos.
+
+</p>
+
+<div class="selector-buttons">
+
+<button class="btn-admin"
+onclick="mostrarAdmin()">
+
+👨‍💼 Administrador
+
+</button>
+
+<button class="btn-user"
+onclick="mostrarSolicitante()">
+
+🧑‍🦽 Solicitar apoyo
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- LOGIN -->
+
+<div id="login">
+
+<div class="login-box">
+
+<div class="login-icon">
+<i class="fa-solid fa-shield-heart"></i>
+</div>
+
+<h1>Acceso administrador</h1>
+
+<p>
+Ingrese sus credenciales.
+</p>
+
+<input type="text"
+id="user"
+placeholder="Usuario">
+
+<input type="password"
+id="pass"
+placeholder="Contraseña">
+
+<button onclick="entrar()">
+Ingresar
+</button>
+
+<button onclick="volverInicio()"
+style="background:#DCEBFF;">
+Volver
+</button>
+
+</div>
+
+</div>
+
+<!-- SOLICITANTE -->
+
+<div id="solicitantePanel">
+
+<header>
+
+<div class="header-left">
+
+<div class="logo-mini">
+<i class="fa-solid fa-heart-pulse"></i>
+</div>
+
+<div>
+
+<h1>Solicitud de apoyo</h1>
+
+<p>
+Consulta y registro de aparatos ortopédicos.
+</p>
+
+</div>
+
+</div>
+
+<div class="header-actions">
+
+<button onclick="modoOscuro()">
+🌙 Modo oscuro
+</button>
+
+<button onclick="volverInicio()">
+🏠 Inicio
+</button>
+
+</div>
+
+</header>
+
+<div class="content">
+
+<!-- HERO -->
+
+<div class="hero">
+
+<div>
+
+<h1>
+❤️ Ayudando a transformar vidas
+</h1>
+
+<p>
+
+Solicita aparatos ortopédicos de manera rápida,
+segura y organizada para beneficiar a personas
+en situación vulnerable mediante un sistema
+inteligente de atención prioritaria.
+
+</p>
+
+<div class="badges">
+
+<div class="badge">
+♻ Reutilización responsable
+</div>
+
+<div class="badge">
+⚡ Atención eficiente
+</div>
+
+<div class="badge">
+📋 Registro inteligente
+</div>
+
+</div>
+
+</div>
+
+<i class="fa-solid fa-hand-holding-heart"></i>
+
+</div>
+
+<!-- IMPACTO -->
+
+<div class="impacto">
+
+<div class="impact-card">
+
+<h3>Personas beneficiadas</h3>
+
+<h2>154</h2>
+
+<p>❤️ Impacto comunitario</p>
+
+</div>
+
+<div class="impact-card">
+
+<h3>Aparatos reutilizados</h3>
+
+<h2>92</h2>
+
+<p>♻ Consumo responsable</p>
+
+</div>
+
+<div class="impact-card">
+
+<h3>Tiempo de respuesta</h3>
+
+<h2>24h</h2>
+
+<p>⚡ Atención eficiente</p>
+
+</div>
+
+</div>
+
+<!-- INVENTARIO -->
+
+<div class="stats">
+
+<div class="card">
+
+<i class="fa-solid fa-wheelchair"></i>
+
+<h3>Sillas disponibles</h3>
+
+<h2 id="sillasUser">5</h2>
+
+</div>
+
+<div class="card">
+
+<i class="fa-solid fa-crutch"></i>
+
+<h3>Muletas disponibles</h3>
+
+<h2 id="muletasUser">10</h2>
+
+</div>
+
+<div class="card">
+
+<i class="fa-solid fa-person-walking"></i>
+
+<h3>Andaderas disponibles</h3>
+
+<h2 id="andaderasUser">7</h2>
+
+</div>
+
+<div class="card">
+
+<i class="fa-solid fa-person-walking-with-cane"></i>
+
+<h3>Bastones disponibles</h3>
+
+<h2 id="bastonesUser">8</h2>
+
+</div>
+
+</div>
+
+<!-- FORM -->
+
+<div class="form">
+
+<h2>
+📝 Registrar solicitud
+</h2>
+
+<p>
+
+Complete el formulario para registrar
+su solicitud de apoyo.
+
+</p>
+
+<div class="grid">
+
+<input type="text"
+id="nombreUser"
+placeholder="Nombre completo">
+
+<input type="number"
+id="edadUser"
+placeholder="Edad">
+
+<input type="text"
+placeholder="Número telefónico">
+
+<input type="text"
+placeholder="Dirección">
+
+<select id="aparatoUser">
+
+<option value="sillas">
+Silla de ruedas
+</option>
+
+<option value="muletas">
+Muletas
+</option>
+
+<option value="andaderas">
+Andadera
+</option>
+
+<option value="bastones">
+Bastón
+</option>
+
+</select>
+
+<select id="urgenciaUser">
+
+<option value="1">
+Urgencia baja
+</option>
+
+<option value="2">
+Urgencia media
+</option>
+
+<option value="3">
+Urgencia alta
+</option>
+
+</select>
+
+<select id="economicaUser">
+
+<option value="0">
+Situación económica estable
+</option>
+
+<option value="2">
+Bajos recursos
+</option>
+
+</select>
+
+<select id="discapacidadUser">
+
+<option value="0">
+Discapacidad temporal
+</option>
+
+<option value="3">
+Discapacidad permanente
+</option>
+
+</select>
+
+<select id="adultoUser">
+
+<option value="0">
+No adulto mayor
+</option>
+
+<option value="2">
+Adulto mayor
+</option>
+
+</select>
+
+</div>
+
+<button onclick="crearSolicitud()">
+
+✨ Enviar solicitud
+
+</button>
+
+</div>
+
+<!-- GALERIA -->
+
+<div class="galeria">
+
+<div class="galeria-card">
+
+<img src="https://images.unsplash.com/photo-1526256262350-7da7584cf5eb?q=80&w=1200&auto=format&fit=crop">
+
+<div class="overlay">
+
+<h3>Atención comunitaria</h3>
+
+<p>
+Apoyo a personas vulnerables.
+</p>
+
+</div>
+
+</div>
+
+<div class="galeria-card">
+
+<img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200&auto=format&fit=crop">
+
+<div class="overlay">
+
+<h3>Trabajo solidario</h3>
+
+<p>
+Compromiso con la comunidad.
+</p>
+
+</div>
+
+</div>
+
+<div class="galeria-card">
+
+<img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?q=80&w=1200&auto=format&fit=crop">
+
+<div class="overlay">
+
+<h3>Impacto social</h3>
+
+<p>
+Ayudando a transformar vidas.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- PASOS -->
+
+<div class="pasos">
+
+<div class="paso">
+
+<div class="numero">
+1
+</div>
+
+<h3>Consulta</h3>
+
+<p>
+Revisa disponibilidad.
+</p>
+
+</div>
+
+<div class="paso">
+
+<div class="numero">
+2
+</div>
+
+<h3>Registra</h3>
+
+<p>
+Llena el formulario.
+</p>
+
+</div>
+
+<div class="paso">
+
+<div class="numero">
+3
+</div>
+
+<h3>Prioridad</h3>
+
+<p>
+El sistema analiza necesidad.
+</p>
+
+</div>
+
+<div class="paso">
+
+<div class="numero">
+4
+</div>
+
+<h3>Atención</h3>
+
+<p>
+La asociación revisa tu caso.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ADMIN -->
+
+<div id="sistema">
+
+<header>
+
+<div class="header-left">
+
+<div class="logo-mini">
+<i class="fa-solid fa-chart-line"></i>
+</div>
+
+<div>
+
+<h1>Dashboard Solidario</h1>
+
+<p>
+Control inteligente de inventario.
+</p>
+
+</div>
+
+</div>
+
+<div class="header-actions">
+
+<button onclick="modoOscuro()">
+🌙 Modo oscuro
+</button>
+
+<button onclick="exportar()">
+📄 Reporte
+</button>
+
+<button onclick="volverInicio()">
+🏠 Inicio
+</button>
+
+</div>
+
+</header>
+
+<div class="container">
+
+<div class="sidebar">
+
+<div class="sidebar-title">
+
+<i class="fa-solid fa-layer-group"></i>
+
+<h2>Panel</h2>
+
+</div>
+
+<p>🏠 Inicio</p>
+<p>📦 Inventario</p>
+<p>📝 Solicitudes</p>
+<p>📊 Estadísticas</p>
+<p>❤️ Impacto social</p>
+<p>⚙ Configuración</p>
+
+</div>
+
+<div class="content">
+
+<div class="hero">
+
+<div>
+
+<h1>
+📊 Gestión inteligente de inventario
+</h1>
+
+<p>
+
+Sistema digital diseñado para optimizar
+el control, registro y distribución de
+aparatos ortopédicos de manera eficiente.
+
+</p>
+
+<div class="badges">
+
+<div class="badge">
+📈 Estadísticas inteligentes
+</div>
+
+<div class="badge">
+🧠 Priorización automática
+</div>
+
+<div class="badge">
+⚡ Gestión eficiente
+</div>
+
+</div>
+
+</div>
+
+<i class="fa-solid fa-chart-pie"></i>
+
+</div>
+
+<div class="alerta"
+id="alerta">
+
+⚠ Sistema activo y monitoreando inventario.
+
+</div>
+
+<div class="impacto">
+
+<div class="impact-card">
+
+<h3>Personas beneficiadas</h3>
+
+<h2>154</h2>
+
+<p>❤️ Impacto comunitario</p>
+
+</div>
+
+<div class="impact-card">
+
+<h3>Aparatos reutilizados</h3>
+
+<h2>92</h2>
+
+<p>♻ Consumo responsable</p>
+
+</div>
+
+<div class="impact-card">
+
+<h3>Dinero ahorrado</h3>
+
+<h2>$240K</h2>
+
+<p>💰 Apoyo social</p>
+
+</div>
+
+</div>
+
+<div class="stats">
+
+<div class="card">
+
+<i class="fa-solid fa-wheelchair"></i>
+
+<h3>Sillas</h3>
+
+<h2 id="sillas">5</h2>
+
+</div>
+
+<div class="card">
+
+<i class="fa-solid fa-crutch"></i>
+
+<h3>Muletas</h3>
+
+<h2 id="muletas">10</h2>
+
+</div>
+
+<div class="card">
+
+<i class="fa-solid fa-person-walking"></i>
+
+<h3>Andaderas</h3>
+
+<h2 id="andaderas">7</h2>
+
+</div>
+
+<div class="card">
+
+<i class="fa-solid fa-person-walking-with-cane"></i>
+
+<h3>Bastones</h3>
+
+<h2 id="bastones">8</h2>
+
+</div>
+
+</div>
+
+<div class="search">
+
+<input type="text"
+id="buscar"
+placeholder="Buscar persona o aparato..."
+onkeyup="buscarTabla()">
+
+</div>
+
+<table>
+
+<tr>
+
+<th>Folio</th>
+<th>Nombre</th>
+<th>Aparato</th>
+<th>Tipo</th>
+<th>Prioridad</th>
+<th>Fecha</th>
+
+</tr>
+
+<tbody id="tabla"></tbody>
+
+</table>
+
+<div class="chart-box">
+
+<h2>
+📈 Inventario Disponible
+</h2>
+
+<canvas id="grafica"></canvas>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+let contador = 1;
+let chart;
+
+/* PANTALLAS */
+
+function mostrarAdmin(){
+
+document.getElementById("inicioSelector")
+.style.display = "none";
+
+document.getElementById("login")
+.style.display = "flex";
+
+}
+
+function mostrarSolicitante(){
+
+document.getElementById("inicioSelector")
+.style.display = "none";
+
+document.getElementById("solicitantePanel")
+.style.display = "block";
+
+sincronizarInventario();
+
+}
+
+function volverInicio(){
+
+location.reload();
+
+}
+
+/* LOGIN */
+
+function entrar(){
+
+let user =
+document.getElementById("user").value;
+
+let pass =
+document.getElementById("pass").value;
+
+if(user === "admin" && pass === "1234"){
+
+document.getElementById("login")
+.style.display = "none";
+
+document.getElementById("sistema")
+.style.display = "block";
+
+cargarDatos();
+
+crearGrafica();
+
+}else{
+
+alert("Usuario incorrecto");
+
+}
+
+}
+
+/* SOLICITUD */
+
+function crearSolicitud(){
+
+let nombre =
+document.getElementById("nombreUser").value;
+
+let aparato =
+document.getElementById("aparatoUser").value;
+
+let urgencia =
+parseInt(document.getElementById("urgenciaUser").value);
+
+let economica =
+parseInt(document.getElementById("economicaUser").value);
+
+let discapacidad =
+parseInt(document.getElementById("discapacidadUser").value);
+
+let adulto =
+parseInt(document.getElementById("adultoUser").value);
+
+let puntos =
+urgencia + economica + discapacidad + adulto;
+
+let prioridad = "";
+
+if(puntos >= 8){
+
+prioridad =
+"<span class='critica'>🔴 CRÍTICA</span>";
+
+}
+else if(puntos >=5){
+
+prioridad =
+"<span class='alta'>🔴 ALTA</span>";
+
+}
+else if(puntos >=3){
+
+prioridad =
+"<span class='media'>🟡 MEDIA</span>";
+
+}
+else{
+
+prioridad =
+"<span class='baja'>🟢 BAJA</span>";
+
+}
+
+let item =
+document.getElementById(aparato);
+
+let valor =
+parseInt(item.innerText);
+
+if(valor <=0){
+
+alert("No disponible");
+return;
+
+}
+
+item.innerText = valor - 1;
+
+sincronizarInventario();
+
+let fecha =
+new Date().toLocaleString();
+
+let fila = `
+<tr>
+<td>JPC-${contador}</td>
+<td>${nombre}</td>
+<td>${aparato}</td>
+<td>Préstamo</td>
+<td>${prioridad}</td>
+<td>${fecha}</td>
+</tr>
+`;
+
+document.getElementById("tabla")
+.innerHTML += fila;
+
+contador++;
+
+guardarDatos();
+
+actualizarGrafica();
+
+alert("Solicitud enviada correctamente");
+
+}
+
+/* GRAFICA */
+
+function crearGrafica(){
+
+const ctx =
+document.getElementById('grafica');
+
+chart = new Chart(ctx, {
+
+type:'bar',
+
+data:{
+
+labels:[
+'Sillas',
+'Muletas',
+'Andaderas',
+'Bastones'
+],
+
+datasets:[{
+
+label:'Disponibles',
+
+data:[5,10,7,8],
+
+borderRadius:15,
+
+backgroundColor:[
+'#1F6BFF',
+'#57D4FF',
+'#0B1F3A',
+'#7A0000'
+]
+
+}]
+
+},
+
+options:{
+
+responsive:true,
+
+plugins:{
+legend:{
+display:false
+}
+},
+
+scales:{
+y:{
+beginAtZero:true
+}
+}
+
+}
+
+});
+
+}
+
+function actualizarGrafica(){
+
+if(!chart) return;
+
+chart.data.datasets[0].data = [
+
+parseInt(document.getElementById("sillas").innerText),
+
+parseInt(document.getElementById("muletas").innerText),
+
+parseInt(document.getElementById("andaderas").innerText),
+
+parseInt(document.getElementById("bastones").innerText)
+
+];
+
+chart.update();
+
+}
+
+/* DARK */
+
+function modoOscuro(){
+
+document.body.classList.toggle("dark");
+
+}
+
+/* BUSCAR */
+
+function buscarTabla(){
+
+let input =
+document.getElementById("buscar")
+.value.toLowerCase();
+
+let filas =
+document.querySelectorAll("#tabla tr");
+
+filas.forEach(fila=>{
+
+let texto =
+fila.innerText.toLowerCase();
+
+fila.style.display =
+texto.includes(input) ? "" : "none";
+
+});
+
+}
+
+/* STORAGE */
+
+function guardarDatos(){
+
+localStorage.setItem(
+"tabla",
+document.getElementById("tabla")
+.innerHTML
+);
+
+}
+
+function cargarDatos(){
+
+if(localStorage.getItem("tabla")){
+
+document.getElementById("tabla")
+.innerHTML =
+localStorage.getItem("tabla");
+
+}
+
+}
+
+/* EXPORTAR */
+
+function exportar(){
+
+window.print();
+
+}
+
+/* INVENTARIO */
+
+function sincronizarInventario(){
+
+document.getElementById("sillasUser")
+.innerText =
+document.getElementById("sillas")
+.innerText;
+
+document.getElementById("muletasUser")
+.innerText =
+document.getElementById("muletas")
+.innerText;
+
+document.getElementById("andaderasUser")
+.innerText =
+document.getElementById("andaderas")
+.innerText;
+
+document.getElementById("bastonesUser")
+.innerText =
+document.getElementById("bastones")
+.innerText;
+
+}
+
+</script>
+
+</body>
+</html>
